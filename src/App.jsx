@@ -78,7 +78,7 @@ console.log(lastClosure, "lastClosure");
   
   return (
     <div className="App">
-      <Title title={"Test Technique Dotsafe"}/>
+      <Title title={"Test Technique"}/>
       {lastClosure && <Closure coutdown={lastClosure} isPassed = {isPassed}/>}
       <Subtitle subtitle={"Fermetures du pont Chaban Delmas"}/>
     <form>
@@ -98,13 +98,16 @@ console.log(lastClosure, "lastClosure");
         </label>
 
       </form>
-      <table >
+      <table class="border-solid">
+        <thead>
         <tr>
             <th>Date de fermeture</th>
             <th>Heure de fermeture</th>
             <th>Heure de réouverture</th>
             <th>Bateau</th>
         </tr>
+        </thead>
+        <tbody>
         {closures
         .filter ((closure) => dateFilter==="" || closure.fields.date_passage === dateFilter)
         .filter ((closure) => boatFilter==="" || closure.fields.bateau === boatFilter)
@@ -115,6 +118,7 @@ console.log(lastClosure, "lastClosure");
           <td>{closure.fields.bateau}</td>
           </tr>
           ))}
+          </tbody>
     </table>
     </div>
   )
