@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function Closure({coutdown, today}) {
+function Closure({coutdown}) {
 
     const [nseconds, setNSeconds] = useState();
     const [nminutes, setNMinutes] = useState();
@@ -8,13 +8,16 @@ function Closure({coutdown, today}) {
     const [ndays, setNDays] = useState();
     
     const countdownDate = new Date(coutdown).getTime();
-    const now = today;
-    const distanceBase = countdownDate - now;
-    
+    const sixMonths = 15778476000;
+    const today = new Date().getTime() - sixMonths;
+    const distanceBase = countdownDate - today;
     let timer;
   
     useEffect(() => {
+
       timer = setInterval(() => {
+
+
         setNDays(Math.floor(distanceBase / (1000 * 60 * 60 * 24)));
         setNHours(
           Math.floor(
@@ -29,9 +32,8 @@ function Closure({coutdown, today}) {
       return () => clearInterval(timer);
     });
 
-
   return (
-    <h2> {`Prochaine fermeture dans: ${ndays}J ${nhours}H ${nminutes}M ${nseconds}s`}</h2>
+    <h2 className='text-start m-4'> {`Prochaine fermeture dans: ${ndays}J ${nhours}H ${nminutes}M ${nseconds}s`}</h2>
   )
 }
 

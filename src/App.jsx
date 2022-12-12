@@ -12,8 +12,12 @@ function App() {
   const [boat, setBoat] = useState();
   const [dateFilter, setDateFilter] = useState("");
   const [boatFilter, setBoatFilter] = useState("");
-  const [lastClosure, setLastClosure] = useState("")
-  const today = new Date("2022-04-03").getTime();
+  const [lastClosure, setLastClosure] = useState("");
+  const sixMonths = 15778476000;
+  const today = new Date().getTime() - sixMonths;
+  console.log(today,  "today");
+  
+
   
   const url = 'https://opendata.bordeaux-metropole.fr/api/records/1.0/search/?dataset=previsions_pont_chaban&q=&rows=80&sort=date_passage&facet=bateau';
   
@@ -23,23 +27,19 @@ function App() {
       setClosures(response.data.records.filter((closure) => new Date(closure.fields.date_passage).getTime() > today).reverse());
     });
   }
-  console.log(closures, "closures");
-  
-  
+
   const getBoat = ()=> {
       axios.get(url).then((response) => {
         setBoat(response.data.records.filter((closure) => new Date(closure.fields.date_passage).getTime()> today).map((closure) => closure.fields.bateau));
       })
   }
 
-  console.log(boat, "boat")
-
   const getDates = () => {
       axios.get(url).then((response) => {
         setDate(response.data.records.filter((closure) => new Date(closure.fields.date_passage).getTime()> today).map((closure) => closure.fields.date_passage));
       })
   }
-  console.log(date, "date");
+  
 
 /* Gère fermeture prochaine ou passée NOTA: Remplacer array date par test pour tester les fermetures futures */
 
@@ -62,9 +62,6 @@ useEffect(() => {
 }, [closures])
 
 
-console.log(lastClosure, "lastClosure");
-
-
   /*  Gère les changements de filtre */
   const selectDate = (event) => {
     setDateFilter(event.target.value);
@@ -78,10 +75,10 @@ console.log(lastClosure, "lastClosure");
   
   return (
     <div className="App">
-      <Title title={"Blabla"}/>
-      {lastClosure && <Closure coutdown={lastClosure} today= {today}/>}
+      <Title title={"Test technique Dotsafe"}/>
       <Subtitle subtitle={"Fermetures du pont Chaban Delmas"}/>
-    <form>
+      {lastClosure && <Closure coutdown={lastClosure}/>}
+    <form className = "m-4">
         <label htmlFor="date">
           Fermeture le {""}  
           <select id="date" onChange={selectDate} >
@@ -98,8 +95,8 @@ console.log(lastClosure, "lastClosure");
         </label>
 
       </form>
-      <table class="border-solid">
-        <thead>
+      <table className="border-solid">
+        <thead className='border-solid'>
         <tr>
             <th>Date de fermeture</th>
             <th>Heure de fermeture</th>
