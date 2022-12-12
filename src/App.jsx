@@ -75,7 +75,7 @@ useEffect(() => {
   
   return (
     <div className="flex flex-col justify-start">
-      <div >
+      <div className="flex h-screen flex-col ">
       <Title title={"Test technique Dotsafe"}/>
       <Subtitle subtitle={"Fermetures du pont Chaban Delmas"}/>
       {lastClosure && <Closure coutdown={lastClosure}/>}
@@ -95,7 +95,6 @@ useEffect(() => {
           </select>
         </label>
       </form>
-      </div>
       <table className="border-separate border-spacing-2 border border-slate-400 ">
         <thead>
         <tr>
@@ -118,6 +117,7 @@ useEffect(() => {
           ))}
           </tbody>
     </table>
+          </div>
     </div>
   )
 }
