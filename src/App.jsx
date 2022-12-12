@@ -74,34 +74,35 @@ useEffect(() => {
   }
   
   return (
-    <div className="App">
+    <div className="flex flex-col justify-start">
+      <div >
       <Title title={"Test technique Dotsafe"}/>
       <Subtitle subtitle={"Fermetures du pont Chaban Delmas"}/>
       {lastClosure && <Closure coutdown={lastClosure}/>}
     <form className = "m-4">
-        <label htmlFor="date">
+        <label className="text-blue-600" htmlFor="date">
           Fermeture le {""}  
-          <select id="date" onChange={selectDate} >
+          <select className ="text-center" id="date" onChange={selectDate} >
             <option value="">---</option>
             {date && date.map((date) => (<option value={date}>{date}</option>))}
           </select>
         </label>
-        <label htmlFor="boat">
+        <label className="text-blue-600" htmlFor="boat">
          Motif de fermeture{""}  
-          <select id="boat" onChange={selectBoat}>
+          <select className ="text-center text-blue-600" id="boat" onChange={selectBoat}>
             <option value="">---</option>
             {boat && boat.map((boat) => (<option value={boat}>{boat}</option>))}
           </select>
         </label>
-
       </form>
-      <table className="border-solid">
-        <thead className='border-solid'>
+      </div>
+      <table className="border-separate border-spacing-2 border border-slate-400 ">
+        <thead>
         <tr>
-            <th>Date de fermeture</th>
-            <th>Heure de fermeture</th>
-            <th>Heure de réouverture</th>
-            <th>Bateau</th>
+            <th className="border border-slate-300 ">Date de fermeture</th>
+            <th className="border border-slate-300 ">Heure de fermeture</th>
+            <th className="border border-slate-300 ">Heure de réouverture</th>
+            <th className="border border-slate-300 ">Bateau</th>
         </tr>
         </thead>
         <tbody>
@@ -109,10 +110,10 @@ useEffect(() => {
         .filter ((closure) => dateFilter==="" || closure.fields.date_passage === dateFilter)
         .filter ((closure) => boatFilter==="" || closure.fields.bateau === boatFilter)
         .map((closure) => (<tr>
-          <td>{closure.fields.date_passage}</td>
-          <td>{closure.fields.fermeture_a_la_circulation}</td>
-          <td>{closure.fields.re_ouverture_a_la_circulation}</td>
-          <td>{closure.fields.bateau}</td>
+          <td className="border border-slate-300 text-center">{closure.fields.date_passage}</td>
+          <td className="border border-slate-300 text-center">{closure.fields.fermeture_a_la_circulation}</td>
+          <td className="border border-slate-300 text-center">{closure.fields.re_ouverture_a_la_circulation}</td>
+          <td className="border border-slate-300 text-center">{closure.fields.bateau}</td>
           </tr>
           ))}
           </tbody>

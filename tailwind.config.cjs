@@ -5,7 +5,9 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      'pont-chaban': "url('/assets/fonts/pontchaban-delmas.jpg')",
+    },
   },
   plugins: [],
 }
