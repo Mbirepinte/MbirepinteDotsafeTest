@@ -12,54 +12,54 @@ function App() {
   const [boat, setBoat] = useState();
   const [dateFilter, setDateFilter] = useState("");
   const [boatFilter, setBoatFilter] = useState("");
-  const [lastClosure, setLastClosure] = useState("");
-  const [isPassed, setIsPassed] = useState(true);
-
+  const [lastClosure, setLastClosure] = useState("")
+  const today = new Date("2022-04-03").getTime();
   
   const url = 'https://opendata.bordeaux-metropole.fr/api/records/1.0/search/?dataset=previsions_pont_chaban&q=&rows=80&sort=date_passage&facet=bateau';
   
   /* Charge les horaires de fermetures du pont Chaban Delmas */
   const getClosure = () => {
     axios.get(url).then((response) => {
-      setClosures(response.data.records);
+      setClosures(response.data.records.filter((closure) => new Date(closure.fields.date_passage).getTime() > today).reverse());
     });
   }
+  console.log(closures, "closures");
+  
+  
   const getBoat = ()=> {
-    axios.get(url).then((response) => {
-      setBoat(response.data.records.map((closure) => closure.fields.bateau));
-  });
-}
+      axios.get(url).then((response) => {
+        setBoat(response.data.records.filter((closure) => new Date(closure.fields.date_passage).getTime()> today).map((closure) => closure.fields.bateau));
+      })
+  }
 
-const getDates = () => {
-  axios.get(url).then((response) => {
-    setDate(response.data.records.map((closure) => closure.fields.date_passage));
-  });
-}
+  console.log(boat, "boat")
+
+  const getDates = () => {
+      axios.get(url).then((response) => {
+        setDate(response.data.records.filter((closure) => new Date(closure.fields.date_passage).getTime()> today).map((closure) => closure.fields.date_passage));
+      })
+  }
+  console.log(date, "date");
 
 /* Gère fermeture prochaine ou passée NOTA: Remplacer array date par test pour tester les fermetures futures */
 
-const test = ["2023-11-06","2023-10-03","2023-01-01","2022-11-05"]
-
-const setCountdown = () => {
-  const now = new Date().getTime();
-  const countdownDate = new Date(date[0]).getTime();
-  const distanceBase = countdownDate - now;
-  console.log(distanceBase, "distanceBase");
-  if (distanceBase < 0) {
-    setLastClosure(date[0]); 
-  } else {
-    setIsPassed(false);
-    setLastClosure(date.filter(date=> new Date(date).getTime() > now) .pop());
+  const setCountdown = () => {
+    setLastClosure(date.pop())
   }
-  }
+  
 
 /*   Charge les requêtes au démarrage de l'application */
 
 useEffect(() => {
-  getClosure(), getBoat(), getDates();
+  getClosure(),
+  getBoat(),
+  getDates();
+
 }, []);
 
-useEffect(()=> date && setCountdown(), [date])
+ useEffect(()=>{
+ date && setCountdown()
+}, [closures])
 
 
 console.log(lastClosure, "lastClosure");
@@ -78,12 +78,12 @@ console.log(lastClosure, "lastClosure");
   
   return (
     <div className="App">
-      <Title title={"Test Technique"}/>
-      {lastClosure && <Closure coutdown={lastClosure} isPassed = {isPassed}/>}
+      <Title title={"Blabla"}/>
+      {lastClosure && <Closure coutdown={lastClosure} today= {today}/>}
       <Subtitle subtitle={"Fermetures du pont Chaban Delmas"}/>
     <form>
         <label htmlFor="date">
-          Fermetures le {""}  
+          Fermeture le {""}  
           <select id="date" onChange={selectDate} >
             <option value="">---</option>
             {date && date.map((date) => (<option value={date}>{date}</option>))}

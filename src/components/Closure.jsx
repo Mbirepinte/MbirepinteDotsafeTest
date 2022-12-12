@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function Closure({coutdown, isPassed}) {
+function Closure({coutdown, today}) {
 
     const [nseconds, setNSeconds] = useState();
     const [nminutes, setNMinutes] = useState();
@@ -8,7 +8,7 @@ function Closure({coutdown, isPassed}) {
     const [ndays, setNDays] = useState();
     
     const countdownDate = new Date(coutdown).getTime();
-    const now = new Date().getTime();
+    const now = today;
     const distanceBase = countdownDate - now;
     
     let timer;
@@ -31,7 +31,7 @@ function Closure({coutdown, isPassed}) {
 
 
   return (
-    <h2> {isPassed? `Temps passé depuis la dernière fermeture : ${-ndays}J ${-nhours}H ${-nminutes}M ${-nseconds}s`:`Prochaine fermeture dans: ${ndays}J ${nhours}H ${nminutes}M ${nseconds}s`}</h2>
+    <h2> {`Prochaine fermeture dans: ${ndays}J ${nhours}H ${nminutes}M ${nseconds}s`}</h2>
   )
 }
 
