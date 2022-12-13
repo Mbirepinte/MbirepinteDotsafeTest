@@ -80,16 +80,16 @@ useEffect(() => {
       <Subtitle subtitle={"Fermetures du pont Chaban Delmas"}/>
       {lastClosure && <Closure coutdown={lastClosure}/>}
     <form className = "m-4 border-solid border-2 border-black p-2">
-        <label className="text-blue-600" htmlFor="date">
+        <label className="text-blue-600 m-4" htmlFor="date">
           Fermeture le {""}  
-          <select className ="text-center" id="date" onChange={selectDate} >
+          <select className ="text-center m-4" id="date" onChange={selectDate} >
             <option value="">---</option>
             {date && date.map((date) => (<option value={date}>{date}</option>))}
           </select>
         </label>
-        <label className="text-blue-600" htmlFor="boat">
+        <label className="text-blue-600 m-4" htmlFor="boat">
          Motif de fermeture{""}  
-          <select className ="text-center text-blue-600" id="boat" onChange={selectBoat}>
+          <select className ="text-center text-blue-600 m-4" id="boat" onChange={selectBoat}>
             <option value="">---</option>
             {boat && boat.map((boat) => (<option value={boat}>{boat}</option>))}
           </select>
