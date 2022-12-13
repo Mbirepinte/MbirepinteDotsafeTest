@@ -74,12 +74,12 @@ useEffect(() => {
   }
   
   return (
-    <div className="flex flex-col justify-start">
-      <div className="flex h-screen flex-col ">
+    <div className="flex flex-col ">
+      <div className="flex h-screen flex-col">
       <Title title={"Test technique Dotsafe"}/>
       <Subtitle subtitle={"Fermetures du pont Chaban Delmas"}/>
       {lastClosure && <Closure coutdown={lastClosure}/>}
-    <form className = "m-4">
+    <form className = "m-4 border-solid border-2 border-black p-2">
         <label className="text-blue-600" htmlFor="date">
           Fermeture le {""}  
           <select className ="text-center" id="date" onChange={selectDate} >
@@ -95,7 +95,7 @@ useEffect(() => {
           </select>
         </label>
       </form>
-      <table className="border-separate border-spacing-2 border border-slate-400 ">
+      <table className="border-separate border-spacing-2 border border-slate-700 ">
         <thead>
         <tr>
             <th className="border border-slate-300 ">Date de fermeture</th>

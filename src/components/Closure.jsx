@@ -33,7 +33,7 @@ function Closure({coutdown}) {
     });
 
   return (
-    <h2 className='text-start m-4 text-red-700'> {`Prochaine fermeture dans: ${ndays}J ${nhours}H ${nminutes}M ${nseconds}s`}</h2>
+    <h2 className='text-start m-4 text-red-700'><a className="text-black"> Prochaine fermeture dans :</a> {`${ndays}J ${nhours}H ${nminutes}M ${nseconds}s`}</h2>
   )
 }
 
